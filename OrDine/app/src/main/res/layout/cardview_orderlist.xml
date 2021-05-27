@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:backgroundTint="#FFFFFF">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -28,21 +27,19 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imgCardviewMenu"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="10dp"
+                android:id="@+id/imgCardviewOrderList"
+                android:layout_width="147dp"
+                android:layout_height="143dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="250dp"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ordine_logo" />
 
             <TextView
-                android:id="@+id/txtNamaCardviewMenu"
+                android:id="@+id/txtNamaCardviewOrderList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
@@ -53,11 +50,11 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imgCardviewMenu"
-                app:layout_constraintTop_toTopOf="@+id/imgCardviewMenu" />
+                app:layout_constraintStart_toEndOf="@+id/imgCardviewOrderList"
+                app:layout_constraintTop_toTopOf="@+id/imgCardviewOrderList" />
 
             <TextView
-                android:id="@+id/txtHargaCardviewMenu"
+                android:id="@+id/txtHargaCardviewOrderList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
@@ -69,53 +66,24 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imgCardviewMenu"
-                app:layout_constraintTop_toBottomOf="@+id/txtNamaCardviewMenu" />
+                app:layout_constraintStart_toEndOf="@+id/imgCardviewOrderList"
+                app:layout_constraintTop_toBottomOf="@+id/txtNamaCardviewOrderList" />
 
             <EditText
-                android:id="@+id/txtEditNumberCardviewMenu"
+                android:id="@+id/txtEditNumberCardviewOrderList"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="90dp"
                 android:ems="10"
-                android:gravity="center"
                 android:inputType="number"
                 android:text="0"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imgCardviewMenu"
-                app:layout_constraintTop_toBottomOf="@+id/txtHargaCardviewMenu" />
-
-            <ImageView
-                android:id="@+id/imgAddMenu"
-                android:layout_width="0dp"
-                android:layout_height="39dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="28dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/txtEditNumberCardviewMenu"
-                app:layout_constraintTop_toTopOf="@+id/txtEditNumberCardviewMenu"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/add" />
-
-            <ImageView
-                android:id="@+id/imgMinusMenu"
-                android:layout_width="0dp"
-                android:layout_height="39dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginBottom="28dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/txtEditNumberCardviewMenu"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imgCardviewMenu"
-                app:layout_constraintTop_toTopOf="@+id/txtEditNumberCardviewMenu"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/minus" />
+                app:layout_constraintStart_toEndOf="@+id/imgCardviewOrderList"
+                app:layout_constraintTop_toBottomOf="@+id/txtHargaCardviewOrderList" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

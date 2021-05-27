@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuActivity">
+    tools:context=".OrderListActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView3"
         android:layout_width="528dp"
         android:layout_height="864dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/bg_ordine" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -25,7 +25,7 @@
         android:layout_marginEnd="50dp"
         android:fontFamily="@font/italiana"
         android:gravity="center"
-        android:text="MENU"
+        android:text="ORDER LIST"
         android:textColor="#000000"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -34,50 +34,77 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewMenu"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddMenu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
     <Button
-        android:id="@+id/btnAddMenu"
+        android:id="@+id/btnOrderOrderList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#553A3A"
-        android:text="Add"
+        android:text="ORDER"
         android:textSize="20sp"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewOrderList"
+        android:layout_width="410dp"
+        android:layout_height="427dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnOrderOrderList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.22" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/italiana"
+        android:text="Total:"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerviewOrderList" />
+
+    <TextView
+        android:id="@+id/txtHargaOrderList"
+        android:layout_width="124dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:text="Harga"
+        android:textAlignment="textEnd"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
     <ImageView
-        android:id="@+id/imgNextMenu"
+        android:id="@+id/imgNextArrowOrderList"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="76dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="22dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerviewMenu"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerviewOrderList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_action_name" />
 
     <ImageView
-        android:id="@+id/imgPrevMenu"
+        android:id="@+id/imgPrevArrowOrderList"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="76dp"
-        android:layout_marginBottom="22dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerviewMenu"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerviewOrderList"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/prev_arrow" />
