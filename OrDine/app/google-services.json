@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "196776477234",
+    "project_id": "ordine-9e7da",
+    "storage_bucket": "ordine-9e7da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196776477234:android:59addac11a8838972c722b",
+        "android_client_info": {
+          "package_name": "com.example.ordine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196776477234-7vkqq1s3j7a57e2cqfo6b71khrc7eoff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkKWP6016-UG78q1Ugq8Ff_VdXxD9ukQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196776477234-7vkqq1s3j7a57e2cqfo6b71khrc7eoff.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
