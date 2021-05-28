@@ -7,8 +7,9 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.ordine"
-        minSdkVersion 24
+        android.defaultConfig.vectorDrawables.useSupportLibrary = true
+        applicationId "com.example.uas"
+        minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
