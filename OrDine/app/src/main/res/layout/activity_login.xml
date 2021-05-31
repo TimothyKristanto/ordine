@@ -28,8 +28,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/italiana"
             android:hint="Email"
-            android:password="false" />
+            android:password="false"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -51,8 +53,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/italiana"
             android:hint="Password"
-            android:password="true" />
+            android:password="true"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -63,6 +67,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="90dp"
         android:backgroundTint="#9E4C4C"
+        android:enabled="false"
         android:fontFamily="@font/italiana"
         android:foregroundTint="#FBFBFB"
         android:text="LOGIN"
@@ -77,9 +82,9 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="26dp"
         android:layout_marginBottom="117dp"
         android:text="Not a member yet?"
         android:textColor="#FFFFFF"
@@ -92,6 +97,8 @@
         android:id="@+id/txtRegisterLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"
@@ -102,6 +109,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/btnLoginLogin" />
 
     <ImageView

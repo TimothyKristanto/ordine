@@ -34,7 +34,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        imgPrevMenu.setOnClickListener(new View.OnClickListener() {
+        imgNextMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), OrderListActivity.class);
