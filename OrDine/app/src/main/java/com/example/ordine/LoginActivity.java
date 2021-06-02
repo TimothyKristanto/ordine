@@ -16,15 +16,23 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     private TextInputLayout txtInputEmailLogin, txtInputPasswordLogin;
     private TextView txtRegisterLogin;
     private Button btnLoginLogin;
-    private Boolean emailIsValid = false, passwordIsValid = false, loginSuccessful = false;
+    private Boolean emailIsValid = false, passwordIsValid = false;
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         txtRegisterLogin = findViewById(R.id.txtRegisterLogin);
         btnLoginLogin = findViewById(R.id.btnLoginLogin);
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance("https://ordine-9e7da-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
         txtInputEmailLogin.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -122,10 +131,27 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    String uid = auth.getCurrentUser().getUid();
                     Toast.makeText(LoginActivity.this, "Login berhasil!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                    startActivity(intent);
-                    finish();
+                    database.getReference().child("user").child(uid).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String nama = snapshot.child("nama").getValue().toString();
+                            String email = snapshot.child("email").getValue().toString();
+                            String tableNumber = snapshot.child("tableNum").getValue().toString();
+                            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                            intent.putExtra("namaUser", nama);
+                            intent.putExtra("emailUser", email);
+                            intent.putExtra("tableNumUser", tableNumber);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }else{
                     Toast.makeText(LoginActivity.this, "Login gagal!", Toast.LENGTH_SHORT).show();
                 }

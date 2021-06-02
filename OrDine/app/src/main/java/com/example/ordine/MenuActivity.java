@@ -24,13 +24,13 @@ public class MenuActivity extends AppCompatActivity {
         imgPrevMenu = findViewById(R.id.imgPrevMenu);
         imgNextMenu = findViewById(R.id.imgNextMenu);
         recyclerviewMenu = findViewById(R.id.recyclerviewMenu);
-        btnAddMenu = findViewById(R.id.btnAddMenu);
 
         imgPrevMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), OrderHistoryActivity.class);
+                Intent intent = new Intent(getBaseContext(), ProfileActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
 
@@ -39,6 +39,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), OrderListActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 

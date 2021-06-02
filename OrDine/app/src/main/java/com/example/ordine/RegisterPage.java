@@ -18,16 +18,23 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Random;
 
 public class RegisterPage extends AppCompatActivity {
     private TextInputLayout txtInputNamaRegister, txtInputEmailRegister, txtInputPasswordRegister;
     private TextView txtLoginRegister;
     private Button btnRegisterRegister;
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
+    private HashMap<String, Object> map;
     private boolean emailIsValid = false;
     private boolean passwordIsValid = false;
     private boolean namaIsValid = false;
     private boolean registerSuccessful = false;
+    private Random randint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,9 @@ public class RegisterPage extends AppCompatActivity {
         txtInputNamaRegister = findViewById(R.id.txtInputNamaRegister);
         txtInputEmailRegister = findViewById(R.id.txtInputEmailRegister);
         txtInputPasswordRegister = findViewById(R.id.txtInputPasswordRegister);
+        database = FirebaseDatabase.getInstance("https://ordine-9e7da-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        randint = new Random();
+        map = new HashMap<>();
 
         auth = FirebaseAuth.getInstance();
 
@@ -148,7 +158,6 @@ public class RegisterPage extends AppCompatActivity {
         btnRegisterRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nama = txtInputNamaRegister.getEditText().getText().toString().trim();
                 String email = txtInputEmailRegister.getEditText().getText().toString().trim();
                 String password = txtInputPasswordRegister.getEditText().getText().toString();
 
@@ -162,6 +171,14 @@ public class RegisterPage extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isComplete()){
+                    String nama = txtInputNamaRegister.getEditText().getText().toString().trim();
+                    String email = txtInputEmailRegister.getEditText().getText().toString().trim();
+                    String uid = auth.getCurrentUser().getUid();
+                    int tableNum = randint.nextInt(100) + 1;
+                    map.put("nama", nama);
+                    map.put("email", email);
+                    map.put("tableNum", tableNum);
+                    database.getReference().child("user").child(uid).updateChildren(map);
                     Toast.makeText(RegisterPage.this, "Register berhasil!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegisterPage.this, LoginActivity.class);
                     startActivity(intent);

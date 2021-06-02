@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">UAS</string>
+    <string name="notes1"><![CDATA[Press \"<\" button to go to the previous page]]></string>
+    <string name="notes2"><![CDATA[Press \">\" button to go to the next page]]></string>
 </resources>
