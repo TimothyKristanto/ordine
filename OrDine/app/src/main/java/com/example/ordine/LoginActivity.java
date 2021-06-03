@@ -33,11 +33,14 @@ public class LoginActivity extends AppCompatActivity {
     private Boolean emailIsValid = false, passwordIsValid = false;
     private FirebaseAuth auth;
     private FirebaseDatabase database;
+    private LoadingDialogActivity loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        loading = new LoadingDialogActivity(LoginActivity.this);
         txtInputEmailLogin = findViewById(R.id.txtInputEmailLogin);
         txtInputPasswordLogin = findViewById(R.id.txtInputPasswordLogin);
         txtRegisterLogin = findViewById(R.id.txtRegisterLogin);
@@ -127,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password){
+        loading.startLoading();
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -135,9 +139,11 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Login berhasil!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                     startActivity(intent);
+                    loading.stopLoading();
                     finish();
                 }else{
                     Toast.makeText(LoginActivity.this, "Login gagal!", Toast.LENGTH_SHORT).show();
+                    loading.stopLoading();
                 }
             }
         });

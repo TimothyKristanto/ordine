@@ -18,8 +18,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import Model.OrderList;
 
@@ -84,11 +88,16 @@ public class OrderListActivity extends AppCompatActivity {
         btnOrderOrderList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Date tanggal = Calendar.getInstance().getTime();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+                String tanggalFix = dateFormat.format(tanggal);
+
                 for(OrderList order : listOrder){
                     map.put("nama", order.getNama());
                     map.put("harga", order.getHarga());
                     map.put("jumlah", order.getJumlah());
                     map.put("image path", order.getImagePath());
+                    map.put("tanggal", tanggalFix);
                     database.getReference().child("order history").child(uid).child(order.getNama()).updateChildren(map);
                     database.getReference().child("order list").child(uid).removeValue();
                 }

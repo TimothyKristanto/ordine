@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ordine">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".LoadingDialogActivity"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".MenuDetailsActivity" />
         <activity android:name=".FoodRatingActivity" />
         <activity android:name=".RegisterPage" />

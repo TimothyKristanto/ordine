@@ -17,9 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
+import java.util.Date;
 
 import Model.OrderHistory;
 
@@ -41,6 +40,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         recyclerviewOrderHistory = findViewById(R.id.recyclerviewOrderHistory);
         imgPrevOrderHistory = findViewById(R.id.imgPrevOrderHistory);
         imgNextOrderHistory = findViewById(R.id.imgNextOrderHistory);
+        listOrderHistory = new ArrayList<>();
         adapter = new OrderHistoryRVAdapter(listOrderHistory, getApplicationContext());
         auth = FirebaseAuth.getInstance();
         uid = auth.getCurrentUser().getUid();
@@ -65,23 +65,24 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         setupRecyclerView();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("order history").child(uid);
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://ordine-9e7da-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("order history").child(uid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listOrderHistory.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     OrderHistory orderHistory = new OrderHistory();
                     orderHistory.setNama(snapshot.child("nama").getValue().toString());
                     orderHistory.setImageurl(snapshot.child("image path").getValue().toString());
                     orderHistory.setHarga(snapshot.child("harga").getValue().toString());
+                    orderHistory.setTanggal(snapshot.child("tanggal").getValue().toString());
                     listOrderHistory.add(orderHistory);
                 }
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });

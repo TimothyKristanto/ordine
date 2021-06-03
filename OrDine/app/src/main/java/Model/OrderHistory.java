@@ -1,12 +1,23 @@
 package Model;
 
-public class OrderHistory {
-    private String nama, harga, imageurl;
+import java.util.Date;
 
-    public OrderHistory(String nama, String harga, String imageurl) {
+public class OrderHistory {
+    private String nama, harga, imageurl, tanggal;
+
+    public OrderHistory(String nama, String harga, String imageurl, String tanggal) {
         this.nama = nama;
         this.harga = harga;
         this.imageurl = imageurl;
+        this.tanggal = tanggal;
+    }
+
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
     }
 
     public String getNama() {
