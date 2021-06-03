@@ -133,25 +133,9 @@ public class LoginActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     String uid = auth.getCurrentUser().getUid();
                     Toast.makeText(LoginActivity.this, "Login berhasil!", Toast.LENGTH_SHORT).show();
-                    database.getReference().child("user").child(uid).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String nama = snapshot.child("nama").getValue().toString();
-                            String email = snapshot.child("email").getValue().toString();
-                            String tableNumber = snapshot.child("tableNum").getValue().toString();
-                            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                            intent.putExtra("namaUser", nama);
-                            intent.putExtra("emailUser", email);
-                            intent.putExtra("tableNumUser", tableNumber);
-                            startActivity(intent);
-                            finish();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                    finish();
                 }else{
                     Toast.makeText(LoginActivity.this, "Login gagal!", Toast.LENGTH_SHORT).show();
                 }

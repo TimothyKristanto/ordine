@@ -1,10 +1,10 @@
 package Model;
 
-public class Menu {
+public class FoodMenu {
     private String nama, imagePath, genre;
     private int harga;
 
-    public Menu(String nama, String imagePath, int harga, String genre) {
+    public FoodMenu(String nama, String imagePath, int harga, String genre) {
         this.nama = nama;
         this.imagePath = imagePath;
         this.harga = harga;
@@ -19,7 +19,7 @@ public class Menu {
         this.genre = genre;
     }
 
-    public Menu() {
+    public FoodMenu() {
     }
 
     public String getNama() {
