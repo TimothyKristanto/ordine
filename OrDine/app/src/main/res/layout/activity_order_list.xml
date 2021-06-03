@@ -122,18 +122,19 @@
 
     <TextView
         android:id="@+id/txtHargaOrderList"
-        android:layout_width="124dp"
+        android:layout_width="0dp"
         android:layout_height="38dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:gravity="end"
         android:text="Harga"
         android:textAlignment="textEnd"
         android:textColor="#000000"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:layout_marginRight="24dp"
-        android:gravity="end" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/imgNextOrderList"

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,15 +42,25 @@ public class ProfileActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance("https://ordine-9e7da-default-rtdb.asia-southeast1.firebasedatabase.app/");
         auth = FirebaseAuth.getInstance();
         uid = auth.getCurrentUser().getUid();
-        Intent intent = getIntent();
+        String nama = "", email="", tableNum="";
 
-        String nama = intent.getStringExtra("namaUser");
-        String email = intent.getStringExtra("emailUser");
-        String tableNum = intent.getStringExtra("tableNumUser");
+        database.getReference().child("user").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String nama = snapshot.child("nama").getValue().toString();
+                String email = snapshot.child("email").getValue().toString();
+                String tableNum = snapshot.child("tableNum").getValue().toString();
 
-        txtNamaProfile.setText(nama);
-        txtEmailProfile.setText(email);
-        txtTableNumberProfile.setText(tableNum);
+                txtNamaProfile.setText(nama);
+                txtEmailProfile.setText(email);
+                txtTableNumberProfile.setText(tableNum);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         imgLogoutProfile.setOnClickListener(new View.OnClickListener() {
             @Override
