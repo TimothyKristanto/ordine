@@ -18,7 +18,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -34,13 +39,16 @@ public class RegisterPage extends AppCompatActivity {
     private boolean passwordIsValid = false;
     private boolean namaIsValid = false;
     private boolean registerSuccessful = false;
+    private boolean emailIsTaken;
     private Random randint;
+    private LoadingDialogActivity loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_page);
 
+        loading = new LoadingDialogActivity(RegisterPage.this);
         txtLoginRegister = findViewById(R.id.txtLoginRegister);
         btnRegisterRegister = findViewById(R.id.btnRegisterRegister);
         txtInputNamaRegister = findViewById(R.id.txtInputNamaRegister);
@@ -167,26 +175,58 @@ public class RegisterPage extends AppCompatActivity {
     }
 
     private void registerUser(String email, String password){
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        loading.startLoading();
+        emailIsTaken = false;
+        database.getReference().child("user").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isComplete()){
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                emailIsTaken = checkUserRegistered(snapshot, email);
+
+                if(!emailIsTaken){
                     String nama = txtInputNamaRegister.getEditText().getText().toString().trim();
-                    String email = txtInputEmailRegister.getEditText().getText().toString().trim();
                     String uid = auth.getCurrentUser().getUid();
                     int tableNum = randint.nextInt(100) + 1;
                     map.put("nama", nama);
                     map.put("email", email);
                     map.put("tableNum", tableNum);
-                    database.getReference().child("user").child(uid).updateChildren(map);
-                    Toast.makeText(RegisterPage.this, "Register berhasil!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterPage.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isComplete()){
+                                database.getReference().child("user").child(uid).updateChildren(map);
+                                loading.stopLoading();
+                                Toast.makeText(RegisterPage.this, "Register successful!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterPage.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                loading.stopLoading();
+                                Toast.makeText(RegisterPage.this, "Register failed!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }else{
-                    Toast.makeText(RegisterPage.this, "Register gagal!", Toast.LENGTH_SHORT).show();
+                    loading.stopLoading();
+                    Toast.makeText(RegisterPage.this, "Email has been taken!", Toast.LENGTH_SHORT).show();
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
         });
+
+
+    }
+
+    private boolean checkUserRegistered(DataSnapshot snapshot, String email){
+        for(DataSnapshot dataUser : snapshot.getChildren()){
+            if(email.equalsIgnoreCase(dataUser.child("email").getValue().toString())){
+                return true;
+            }
+        }
+        return false;
     }
 }
